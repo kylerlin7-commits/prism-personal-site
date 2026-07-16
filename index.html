@@ -3,770 +3,147 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="棱镜轨迹：AI × 商业化 × 投资 × 内容的个人说明书与交互式个人网页。" />
-  <meta name="theme-color" content="#f4efe3" />
-  <title>棱镜轨迹 | 个人经营体说明书</title>
+  <meta name="description" content="棱镜轨迹：人生有无限可能。AI、商业化、投资与内容复合型个人说明书。" />
+  <meta name="theme-color" content="#fbfaf6" />
+  <title>棱镜轨迹 | 人生有无限可能</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,60,1&family=Manrope:wght@400;500;650;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Manrope:wght@400;520;650;780&display=swap');
 
-    :root {
-      --ink: oklch(20% 0.032 74);
-      --ink-soft: oklch(35% 0.045 74);
-      --muted: oklch(49% 0.04 78);
-      --paper: oklch(95% 0.032 88);
-      --paper-deep: oklch(89% 0.046 82);
-      --panel: oklch(98% 0.024 92 / 0.82);
-      --gold: oklch(73% 0.16 78);
-      --ember: oklch(59% 0.19 34);
-      --green: oklch(56% 0.13 156);
-      --blue: oklch(50% 0.13 238);
-      --violet: oklch(49% 0.16 302);
-      --line: oklch(75% 0.044 80);
-      --shadow: 0 26px 70px oklch(28% 0.05 74 / 0.14);
-      --radius-xl: 30px;
-      --radius-lg: 20px;
-      --radius-sm: 10px;
-      --font-display: "Fraunces", "Noto Serif SC", serif;
-      --font-body: "Manrope", "Noto Serif SC", sans-serif;
-      color-scheme: light;
+    :root{
+      --bg:#fbfaf6;
+      --bg-2:#f2efe7;
+      --ink:#171512;
+      --soft:#4e4941;
+      --muted:#787064;
+      --line:#e5dfd2;
+      --panel:rgba(255,255,255,.72);
+      --warm:#d79d42;
+      --red:#d76a51;
+      --green:#5e9b73;
+      --blue:#536fa8;
+      --purple:#8a6caf;
+      --shadow:0 22px 70px rgba(58,44,22,.10);
+      --radius:28px;
+      --serif:"Noto Serif SC", ui-serif, serif;
+      --sans:"Manrope", "Noto Serif SC", system-ui, sans-serif;
     }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-3;background:
+      radial-gradient(circle at 15% 18%, rgba(215,157,66,.20), transparent 28rem),
+      radial-gradient(circle at 83% 8%, rgba(83,111,168,.14), transparent 26rem),
+      radial-gradient(circle at 50% 88%, rgba(94,155,115,.10), transparent 30rem)}
+    body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;opacity:.55;background-image:linear-gradient(rgba(23,21,18,.035) 1px,transparent 1px);background-size:100% 42px;mask-image:linear-gradient(to bottom,transparent,black 10%,black 90%,transparent)}
+    a{color:inherit}.skip{position:fixed;left:1rem;top:-4rem;z-index:100;background:var(--ink);color:var(--bg);padding:.75rem 1rem;border-radius:999px}.skip:focus{top:1rem}
+    .shell{width:min(1160px,calc(100% - 32px));margin-inline:auto}.wide{width:min(1280px,calc(100% - 32px));margin-inline:auto}
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(251,250,246,.76);border-bottom:1px solid rgba(229,223,210,.75)}
+    .nav-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .brand{display:flex;gap:.7rem;align-items:center;text-decoration:none;font-weight:780}.mark{width:32px;height:32px;border-radius:12px;background:conic-gradient(from 220deg,var(--warm),var(--green),var(--blue),var(--purple),var(--red),var(--warm));clip-path:polygon(50% 0,95% 28%,83% 92%,14% 100%,0 34%);box-shadow:inset 0 0 0 5px rgba(255,255,255,.52)}
+    .nav a:not(.brand){text-decoration:none;color:var(--soft);font-size:.94rem;padding:.66rem .78rem;border-radius:999px}.nav a:not(.brand):hover,.nav a:not(.brand):focus-visible{background:#fff;outline:1px solid var(--line)}
+    .links{display:flex;gap:.2rem;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      min-height: 100dvh;
-      color: var(--ink);
-      font-family: var(--font-body);
-      background:
-        radial-gradient(circle at 18% 8%, oklch(85% 0.12 78 / 0.78), transparent 28rem),
-        radial-gradient(circle at 88% 14%, oklch(72% 0.08 163 / 0.28), transparent 24rem),
-        linear-gradient(135deg, var(--paper), oklch(92% 0.04 68));
-      overflow-x: hidden;
-    }
+    .hero{padding:clamp(64px,9vw,112px) 0 54px;position:relative}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(28px,6vw,86px);align-items:center}.tag{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--line);background:rgba(255,255,255,.62);border-radius:999px;padding:.55rem .78rem;color:var(--soft);font-size:.92rem}.tag i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(94,155,115,.14)}
+    h1{font-family:var(--serif);font-size:clamp(46px,7.4vw,104px);line-height:1.02;letter-spacing:-.075em;margin:22px 0 18px;font-weight:900;max-width:8.8em}.grad{background:linear-gradient(90deg,var(--ink),#665238 55%,var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:clamp(17px,2vw,22px);line-height:1.82;color:var(--soft);max-width:680px;margin:0}.lead strong{color:var(--ink)}.hero-actions{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border-radius:999px;padding:.8rem 1.08rem;text-decoration:none;border:1px solid var(--ink);transition:transform .22s cubic-bezier(.2,.8,.2,1),background .22s,box-shadow .22s}.btn.primary{background:var(--ink);color:var(--bg);box-shadow:0 14px 32px rgba(23,21,18,.16)}.btn.secondary{background:#fff;color:var(--ink);border-color:var(--line)}.btn:hover,.btn:focus-visible{transform:translateY(-2px);outline:3px solid rgba(215,157,66,.24);outline-offset:3px}.btn:active{transform:translateY(0) scale(.985)}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .42;
-      z-index: -1;
-      background-image:
-        linear-gradient(oklch(28% 0.04 74 / .06) 1px, transparent 1px),
-        linear-gradient(90deg, oklch(28% 0.04 74 / .05) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at center, black, transparent 78%);
-    }
+    .prism-box{position:relative;min-height:520px;display:grid;place-items:center}.prism-core{position:relative;width:min(420px,90vw);aspect-ratio:1.05;filter:drop-shadow(0 32px 80px rgba(58,44,22,.14))}.slice{position:absolute;inset:0;clip-path:polygon(var(--a),var(--b),var(--c),var(--d));border:1px solid rgba(23,21,18,.08);background:linear-gradient(135deg,rgba(255,255,255,.72),var(--col));backdrop-filter:blur(8px);transform:translate(var(--x),var(--y)) rotate(var(--r));transition:transform .55s cubic-bezier(.2,.9,.2,1),filter .55s}.slice:hover{transform:translate(calc(var(--x)*1.4),calc(var(--y)*1.4)) rotate(var(--r)) scale(1.025);filter:saturate(1.12)}.s1{--a:48% 0;--b:100% 28%;--c:58% 49%;--d:21% 33%;--x:0px;--y:-10px;--r:-2deg;--col:rgba(215,157,66,.38)}.s2{--a:100% 29%;--b:88% 88%;--c:58% 50%;--d:58% 50%;--x:14px;--y:3px;--r:4deg;--col:rgba(83,111,168,.30)}.s3{--a:88% 89%;--b:18% 100%;--c:38% 56%;--d:58% 50%;--x:2px;--y:18px;--r:-3deg;--col:rgba(94,155,115,.32)}.s4{--a:18% 100%;--b:0 34%;--c:21% 33%;--d:38% 56%;--x:-16px;--y:6px;--r:5deg;--col:rgba(215,106,81,.28)}.s5{--a:21% 33%;--b:58% 49%;--c:38% 56%;--d:38% 56%;--x:-3px;--y:0px;--r:0deg;--col:rgba(138,108,175,.26)}.prism-caption{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:999px;padding:.72rem .9rem;color:var(--soft);font-size:.92rem;white-space:nowrap}.beam{position:absolute;height:1px;background:linear-gradient(90deg,transparent,var(--ink),transparent);opacity:.18}.b1{width:82%;left:-4%;top:30%;transform:rotate(-14deg)}.b2{width:70%;right:-10%;top:64%;transform:rotate(16deg)}
 
-    a { color: inherit; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-    button { font: inherit; }
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:36px}.metric{background:rgba(255,255,255,.62);border:1px solid var(--line);border-radius:20px;padding:18px 16px}.metric b{font-family:var(--serif);font-size:clamp(26px,3vw,42px);line-height:1}.metric span{display:block;color:var(--muted);margin-top:6px;line-height:1.5;font-size:.94rem}
 
-    .skip-link {
-      position: fixed;
-      left: 1rem;
-      top: -5rem;
-      z-index: 100;
-      background: var(--ink);
-      color: var(--paper);
-      padding: .8rem 1rem;
-      border-radius: 999px;
-      transition: top .2s ease;
-    }
-    .skip-link:focus { top: 1rem; }
+    section{padding:clamp(66px,9vw,118px) 0}.head{display:grid;grid-template-columns:.78fr .52fr;gap:34px;align-items:end;margin-bottom:34px}.k{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;color:var(--red);font-weight:780}.head h2{font-family:var(--serif);font-size:clamp(32px,5vw,68px);line-height:1.08;letter-spacing:-.055em;margin:.45rem 0 0}.head p{margin:0;color:var(--soft);line-height:1.8}
 
-    .grain {
-      position: fixed;
-      inset: -20%;
-      pointer-events: none;
-      z-index: -1;
-      opacity: .12;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
-    }
+    .identity{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.66),rgba(255,255,255,.28));border-radius:var(--radius);padding:clamp(22px,5vw,48px);box-shadow:var(--shadow);overflow:hidden}.identity-line{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:18px 0}.identity-line:first-child{padding-top:0}.identity-line:last-child{border-bottom:0;padding-bottom:0}.identity-line small{width:120px;color:var(--muted);font-weight:650}.identity-line strong{font-family:var(--serif);font-size:clamp(23px,3vw,40px);letter-spacing:-.04em}.identity-line span{color:var(--soft);line-height:1.7}.ticker{display:flex;gap:16px;margin-top:24px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent)}.ticker-track{display:flex;gap:16px;animation:marquee 28s linear infinite}.chip{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:.62rem .9rem;background:#fff;color:var(--soft)}
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: .9rem clamp(1rem, 3vw, 2.4rem);
-      backdrop-filter: blur(18px);
-      background: color-mix(in oklch, var(--paper) 76%, transparent);
-      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 34%);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: .72rem;
-      text-decoration: none;
-      min-width: max-content;
-    }
-    .brand-mark {
-      width: 2.25rem;
-      height: 2.25rem;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--ink);
-      border-radius: 50%;
-      background: conic-gradient(from 210deg, var(--gold), var(--green), var(--blue), var(--ember), var(--gold));
-      box-shadow: inset 0 0 0 6px var(--paper), 0 10px 30px oklch(35% 0.08 70 / .18);
-    }
-    .brand strong { font-family: var(--font-display); font-size: 1.06rem; letter-spacing: .02em; }
-    .nav-links { display: flex; gap: .35rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
-    .nav-links a, .ghost-btn {
-      border: 1px solid transparent;
-      color: var(--ink-soft);
-      text-decoration: none;
-      padding: .64rem .82rem;
-      border-radius: 999px;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
-      transition: transform .22s cubic-bezier(.2,.9,.2,1), background .22s, border-color .22s;
-    }
-    .nav-links a:hover, .ghost-btn:hover, .nav-links a:focus-visible, .ghost-btn:focus-visible {
-      background: oklch(98% 0.02 90 / .66);
-      border-color: color-mix(in oklch, var(--line), var(--ink) 16%);
-      transform: translateY(-1px);
-      outline: none;
-    }
+    .services{display:grid;grid-template-columns:300px 1fr;gap:22px}.service-nav{display:grid;gap:10px;align-content:start;position:sticky;top:92px}.service-btn{text-align:left;border:1px solid var(--line);background:#fff;border-radius:20px;min-height:74px;padding:14px 16px;cursor:pointer;color:var(--soft);transition:.22s}.service-btn b{display:block;color:var(--ink);margin-bottom:3px}.service-btn:hover,.service-btn:focus-visible{transform:translateX(4px);outline:3px solid rgba(215,157,66,.18)}.service-btn[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:rgba(251,250,246,.72)}.service-btn[aria-selected=true] b{color:var(--bg)}.service-panel{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.68);box-shadow:var(--shadow);overflow:hidden}.service-hero{padding:30px 32px;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(255,255,255,.8),var(--tint))}.service-hero h3{font-family:var(--serif);font-size:clamp(30px,4vw,56px);letter-spacing:-.055em;line-height:1.05;margin:0 0 12px}.service-hero p{margin:0;color:var(--soft);line-height:1.8;max-width:760px}.service-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}.block{background:rgba(255,255,255,.72);padding:24px}.block h4{margin:0 0 12px;font-size:1rem}.block ul{margin:0;padding-left:1.1rem;color:var(--soft);line-height:1.8}.cases{display:grid;gap:10px}.case{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fff}.case b{display:block;margin-bottom:4px}.case span{color:var(--soft);line-height:1.65;font-size:.94rem}.proofbar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.proof{border-radius:16px;background:rgba(23,21,18,.045);padding:12px}.proof b{display:block;font-family:var(--serif);font-size:1.35rem}.proof span{font-size:.88rem;color:var(--muted)}
 
-    .hero {
-      position: relative;
-      min-height: calc(100dvh - 74px);
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(310px, .72fr);
-      align-items: center;
-      gap: clamp(2rem, 6vw, 6rem);
-      padding: clamp(2rem, 7vw, 7rem) clamp(1.1rem, 5vw, 5.6rem) clamp(3rem, 6vw, 6rem);
-    }
-    .eyebrow {
-      width: fit-content;
-      display: inline-flex;
-      gap: .55rem;
-      align-items: center;
-      padding: .5rem .75rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in oklch, var(--line), var(--ink) 12%);
-      background: color-mix(in oklch, var(--paper), white 34%);
-      font-size: .9rem;
-      color: var(--ink-soft);
-    }
-    .pulse-dot {
-      width: .58rem;
-      height: .58rem;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 .35rem color-mix(in oklch, var(--green), transparent 78%);
-    }
-    h1 {
-      margin: 1.35rem 0 1rem;
-      max-width: 11ch;
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 12vw, 11.2rem);
-      line-height: .84;
-      letter-spacing: -.075em;
-      font-weight: 900;
-    }
-    .subtitle {
-      max-width: 58rem;
-      font-size: clamp(1.08rem, 1.7vw, 1.36rem);
-      line-height: 1.76;
-      color: var(--ink-soft);
-      margin: 0;
-    }
-    .subtitle strong { color: var(--ink); font-weight: 800; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.7rem; }
-    .primary-btn, .secondary-btn {
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .55rem;
-      padding: .88rem 1.05rem;
-      border-radius: 999px;
-      text-decoration: none;
-      border: 1px solid var(--ink);
-      cursor: pointer;
-      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s, background .22s;
-    }
-    .primary-btn { background: var(--ink); color: var(--paper); box-shadow: 0 16px 34px oklch(24% 0.04 74 / .22); }
-    .secondary-btn { background: color-mix(in oklch, var(--paper), white 28%); color: var(--ink); }
-    .primary-btn:hover, .secondary-btn:hover, .primary-btn:focus-visible, .secondary-btn:focus-visible { transform: translateY(-2px); outline: 3px solid color-mix(in oklch, var(--gold), transparent 55%); outline-offset: 3px; }
-    .primary-btn:active, .secondary-btn:active { transform: translateY(0) scale(.98); }
+    .method{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.method-card{border:1px solid var(--line);background:#fff;border-radius:24px;padding:24px;min-height:220px;position:relative;overflow:hidden}.method-card:before{content:attr(data-no);position:absolute;right:16px;top:10px;font-family:var(--serif);font-size:4.5rem;color:rgba(23,21,18,.045);font-weight:900}.method-card h3{font-family:var(--serif);font-size:1.65rem;margin:0 0 10px}.method-card p{margin:0;color:var(--soft);line-height:1.75}
 
-    .prism-stage {
-      position: relative;
-      min-height: 520px;
-      display: grid;
-      place-items: center;
-      perspective: 1000px;
-    }
-    .orbit {
-      position: absolute;
-      inset: 8%;
-      border: 1px dashed color-mix(in oklch, var(--ink), transparent 72%);
-      border-radius: 50%;
-      animation: spin 24s linear infinite;
-    }
-    .orbit:nth-child(2) { inset: 18% 4%; transform: rotateX(72deg); animation-duration: 34s; }
-    .prism {
-      width: min(28vw, 270px);
-      min-width: 210px;
-      aspect-ratio: 1;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: float 7s ease-in-out infinite;
-      cursor: grab;
-    }
-    .facet {
-      position: absolute;
-      inset: 0;
-      clip-path: polygon(50% 0, 100% 100%, 0 100%);
-      border: 1px solid color-mix(in oklch, var(--ink), transparent 64%);
-      background: linear-gradient(135deg, oklch(96% 0.04 86 / .76), oklch(68% 0.12 74 / .5));
-      box-shadow: inset 0 0 55px oklch(100% 0 0 / .5);
-      transform-origin: 50% 72%;
-      backdrop-filter: blur(8px);
-    }
-    .facet:nth-child(1) { transform: rotateY(0deg) translateZ(52px); }
-    .facet:nth-child(2) { transform: rotateY(72deg) translateZ(52px); background: linear-gradient(135deg, oklch(86% 0.1 156 / .6), transparent); }
-    .facet:nth-child(3) { transform: rotateY(144deg) translateZ(52px); background: linear-gradient(135deg, oklch(76% 0.12 238 / .54), transparent); }
-    .facet:nth-child(4) { transform: rotateY(216deg) translateZ(52px); background: linear-gradient(135deg, oklch(76% 0.14 34 / .5), transparent); }
-    .facet:nth-child(5) { transform: rotateY(288deg) translateZ(52px); background: linear-gradient(135deg, oklch(74% 0.12 302 / .5), transparent); }
-    .ray {
-      position: absolute;
-      height: 2px;
-      transform-origin: 0 50%;
-      background: linear-gradient(90deg, var(--ink), transparent);
-      opacity: .36;
-    }
-    .ray.r1 { width: 38%; left: 0; top: 44%; transform: rotate(-14deg); }
-    .ray.r2 { width: 42%; left: 57%; top: 52%; transform: rotate(12deg); background: linear-gradient(90deg, var(--green), transparent); }
-    .ray.r3 { width: 34%; left: 52%; top: 35%; transform: rotate(-34deg); background: linear-gradient(90deg, var(--ember), transparent); }
+    .case-wall{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.big-case,.mini-case{border:1px solid var(--line);border-radius:var(--radius);background:rgba(255,255,255,.68);padding:26px}.big-case h3,.mini-case h3{font-family:var(--serif);font-size:clamp(26px,3vw,42px);line-height:1.1;margin:0 0 14px;letter-spacing:-.04em}.big-case p,.mini-case p{margin:0;color:var(--soft);line-height:1.8}.case-list{display:grid;gap:12px;margin-top:18px}.case-row{display:grid;grid-template-columns:140px 1fr;gap:14px;border-top:1px solid var(--line);padding-top:12px}.case-row b{color:var(--ink)}.case-row span{color:var(--soft);line-height:1.65}.mini-stack{display:grid;gap:14px}
 
-    .metrics-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1px;
-      margin: 0 clamp(1.1rem, 5vw, 5.6rem);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      background: var(--line);
-      box-shadow: var(--shadow);
-    }
-    .metric {
-      padding: clamp(1rem, 2vw, 1.45rem);
-      background: color-mix(in oklch, var(--paper), white 35%);
-    }
-    .metric b { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 3.2rem); line-height: 1; letter-spacing: -.04em; }
-    .metric span { display: block; margin-top: .42rem; color: var(--muted); line-height: 1.35; }
+    .connect{padding-bottom:96px}.connect-card{border-radius:34px;background:var(--ink);color:var(--bg);padding:clamp(26px,6vw,58px);display:grid;grid-template-columns:1fr .72fr;gap:30px;align-items:end;box-shadow:0 28px 90px rgba(23,21,18,.22)}.connect-card h2{font-family:var(--serif);font-size:clamp(34px,5.5vw,74px);letter-spacing:-.06em;line-height:1.02;margin:0}.connect-card p{color:rgba(251,250,246,.72);line-height:1.8}.contact-pills{display:flex;flex-wrap:wrap;gap:10px}.contact-pills span{border:1px solid rgba(251,250,246,.18);background:rgba(251,250,246,.08);border-radius:999px;padding:.7rem .9rem}.wechat{margin-top:18px;font-size:1.25rem}.wechat code{font-family:var(--sans);font-weight:780;color:#f0bd67}footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.92rem}
 
-    main section {
-      padding: clamp(4.2rem, 9vw, 8rem) clamp(1.1rem, 5vw, 5.6rem);
-    }
-    .section-head {
-      display: grid;
-      grid-template-columns: minmax(0, .68fr) minmax(280px, .32fr);
-      align-items: end;
-      gap: 2rem;
-      margin-bottom: clamp(2rem, 5vw, 4rem);
-    }
-    .kicker { color: var(--ember); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 800; }
-    h2 {
-      margin: .45rem 0 0;
-      font-family: var(--font-display);
-      font-size: clamp(2.3rem, 6vw, 6rem);
-      line-height: .95;
-      letter-spacing: -.055em;
-    }
-    .section-head p { margin: 0; color: var(--ink-soft); line-height: 1.75; }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: minmax(240px, .8fr) minmax(0, 1.2fr);
-      gap: clamp(1rem, 4vw, 4rem);
-      align-items: start;
-    }
-    .sticky-note {
-      position: sticky;
-      top: 6rem;
-      padding: 1.35rem;
-      border-radius: var(--radius-xl);
-      background: var(--ink);
-      color: var(--paper);
-      box-shadow: var(--shadow);
-    }
-    .sticky-note h3 { margin: 0 0 .75rem; font-family: var(--font-display); font-size: 1.55rem; }
-    .sticky-note p { color: color-mix(in oklch, var(--paper), transparent 22%); line-height: 1.7; margin: 0; }
-    .timeline-list { display: grid; gap: 1rem; }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 96px minmax(0, 1fr);
-      gap: 1rem;
-      padding: 1.2rem;
-      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 24%);
-      background: linear-gradient(90deg, color-mix(in oklch, var(--paper), white 26%), transparent);
-      border-radius: var(--radius-lg);
-    }
-    .timeline-item time { font-family: var(--font-display); font-weight: 800; color: var(--ember); }
-    .timeline-item h3 { margin: 0 0 .35rem; font-size: 1.2rem; }
-    .timeline-item p { margin: 0; color: var(--ink-soft); line-height: 1.7; }
-
-    .service-lab {
-      display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      gap: clamp(1rem, 4vw, 3rem);
-      align-items: stretch;
-    }
-    .service-tabs {
-      display: grid;
-      gap: .65rem;
-      align-content: start;
-    }
-    .tab-btn {
-      min-height: 54px;
-      text-align: left;
-      border: 1px solid color-mix(in oklch, var(--line), transparent 12%);
-      background: color-mix(in oklch, var(--paper), white 28%);
-      padding: .9rem 1rem;
-      border-radius: 999px;
-      cursor: pointer;
-      color: var(--ink-soft);
-      transition: transform .2s, background .2s, color .2s, border-color .2s;
-    }
-    .tab-btn:hover, .tab-btn:focus-visible { transform: translateX(4px); outline: none; border-color: var(--ink); }
-    .tab-btn[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-    .service-card {
-      min-height: 420px;
-      padding: clamp(1.4rem, 4vw, 3.4rem);
-      border-radius: var(--radius-xl);
-      border: 1px solid color-mix(in oklch, var(--line), var(--ink) 8%);
-      background:
-        linear-gradient(135deg, color-mix(in oklch, var(--panel), white 8%), color-mix(in oklch, var(--paper-deep), transparent 18%)),
-        radial-gradient(circle at 86% 0%, var(--service-color, var(--gold)), transparent 18rem);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
-    .service-card::after {
-      content: attr(data-index);
-      position: absolute;
-      right: -1rem;
-      bottom: -2.4rem;
-      font-family: var(--font-display);
-      font-size: clamp(7rem, 18vw, 15rem);
-      font-weight: 900;
-      color: oklch(20% 0.04 74 / .055);
-      letter-spacing: -.08em;
-      pointer-events: none;
-    }
-    .service-card h3 { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); line-height: 1; letter-spacing: -.04em; }
-    .service-card .fit { margin: 1rem 0 1.1rem; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; max-width: 58rem; }
-    .service-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; max-width: 56rem; }
-    .service-card li { display: grid; grid-template-columns: 1rem 1fr; gap: .7rem; line-height: 1.6; color: var(--ink-soft); }
-    .service-card li::before { content: ""; width: .58rem; height: .58rem; border-radius: 50%; background: var(--service-color, var(--gold)); margin-top: .55rem; }
-
-    .beliefs {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    .belief {
-      min-height: 340px;
-      padding: clamp(1.4rem, 4vw, 2.8rem);
-      border: 1px solid color-mix(in oklch, var(--line), transparent 10%);
-      border-radius: var(--radius-xl);
-      background: color-mix(in oklch, var(--paper), white 28%);
-      position: relative;
-      overflow: hidden;
-    }
-    .belief::before {
-      content: "";
-      position: absolute;
-      width: 14rem;
-      height: 14rem;
-      border-radius: 50%;
-      right: -5rem;
-      top: -5rem;
-      background: color-mix(in oklch, var(--belief-color), transparent 68%);
-    }
-    .belief h3 { position: relative; margin: 0 0 .85rem; font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.05; }
-    .belief p { position: relative; color: var(--ink-soft); line-height: 1.8; margin: 0; }
-
-    .map-wrap {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 330px;
-      gap: 1rem;
-      align-items: stretch;
-    }
-    .map {
-      min-height: 460px;
-      border-radius: var(--radius-xl);
-      background:
-        linear-gradient(135deg, oklch(24% 0.035 74), oklch(34% 0.05 95));
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      border: 1px solid oklch(20% 0.04 74);
-    }
-    .map svg { width: 100%; height: 100%; position: absolute; inset: 0; }
-    .node {
-      position: absolute;
-      min-width: 132px;
-      border: 1px solid oklch(94% 0.02 88 / .2);
-      background: oklch(94% 0.03 88 / .12);
-      color: var(--paper);
-      border-radius: 999px;
-      padding: .68rem .8rem;
-      backdrop-filter: blur(12px);
-      cursor: pointer;
-      transition: transform .22s, background .22s, border-color .22s;
-    }
-    .node:hover, .node:focus-visible { transform: translateY(-4px) scale(1.02); background: oklch(94% 0.03 88 / .2); outline: 3px solid oklch(75% 0.13 78 / .35); outline-offset: 4px; }
-    .node small { display: block; opacity: .72; }
-    .node[data-node="ai"] { left: 14%; top: 18%; }
-    .node[data-node="biz"] { right: 12%; top: 20%; }
-    .node[data-node="invest"] { left: 22%; bottom: 18%; }
-    .node[data-node="content"] { right: 18%; bottom: 18%; }
-    .node[data-node="system"] { left: 42%; top: 44%; background: oklch(78% 0.14 78 / .18); }
-    .map-copy {
-      border-radius: var(--radius-xl);
-      padding: 1.3rem;
-      background: var(--ink);
-      color: var(--paper);
-      display: grid;
-      align-content: center;
-    }
-    .map-copy h3 { margin: 0 0 .6rem; font-family: var(--font-display); font-size: 2rem; line-height: 1; }
-    .map-copy p { margin: 0; color: color-mix(in oklch, var(--paper), transparent 20%); line-height: 1.75; }
-
-    .connect {
-      border-radius: calc(var(--radius-xl) + 10px) calc(var(--radius-xl) + 10px) 0 0;
-      background: var(--ink);
-      color: var(--paper);
-      margin-top: 3rem;
-    }
-    .connect .section-head p { color: color-mix(in oklch, var(--paper), transparent 24%); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    .contact-card {
-      min-height: 190px;
-      padding: 1.15rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid oklch(94% 0.02 88 / .16);
-      background: oklch(94% 0.02 88 / .075);
-      text-decoration: none;
-      display: grid;
-      align-content: space-between;
-      transition: transform .22s, background .22s;
-    }
-    .contact-card:hover, .contact-card:focus-visible { transform: translateY(-5px); background: oklch(94% 0.02 88 / .13); outline: 3px solid oklch(75% 0.13 78 / .3); outline-offset: 4px; }
-    .contact-card b { font-family: var(--font-display); font-size: 1.35rem; }
-    .contact-card span { color: color-mix(in oklch, var(--paper), transparent 25%); line-height: 1.5; }
-    .wechat {
-      margin-top: 1rem;
-      padding: 1.15rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid oklch(94% 0.02 88 / .18);
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      background: oklch(94% 0.02 88 / .08);
-    }
-    .wechat code {
-      font-family: var(--font-body);
-      font-weight: 800;
-      color: var(--gold);
-      font-size: 1.1rem;
-    }
-    footer { padding: 2rem clamp(1.1rem, 5vw, 5.6rem); background: var(--ink); color: color-mix(in oklch, var(--paper), transparent 30%); }
-
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.9,.2,1), transform .7s cubic-bezier(.2,.9,.2,1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes float { 0%, 100% { transform: rotateX(60deg) rotateZ(-28deg) translateY(0); } 50% { transform: rotateX(60deg) rotateZ(-18deg) translateY(-16px); } }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 940px) {
-      .nav-links a { display: none; }
-      .hero, .section-head, .timeline, .service-lab, .map-wrap { grid-template-columns: 1fr; }
-      .hero { min-height: auto; }
-      .prism-stage { min-height: 380px; }
-      .metrics-strip, .beliefs, .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .sticky-note { position: relative; top: 0; }
-    }
-    @media (max-width: 620px) {
-      .metrics-strip, .beliefs, .contact-grid { grid-template-columns: 1fr; }
-      .timeline-item { grid-template-columns: 1fr; }
-      .service-tabs { grid-template-columns: 1fr 1fr; }
-      .tab-btn { border-radius: var(--radius-lg); }
-      .map { min-height: 560px; }
-      .node { min-width: 118px; }
-      .node[data-node="ai"] { left: 7%; top: 12%; }
-      .node[data-node="biz"] { right: 5%; top: 21%; }
-      .node[data-node="invest"] { left: 8%; bottom: 23%; }
-      .node[data-node="content"] { right: 6%; bottom: 12%; }
-      .node[data-node="system"] { left: 27%; top: 47%; }
-      .wechat { align-items: flex-start; flex-direction: column; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
-      .reveal { opacity: 1; transform: none; }
-    }
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}.reveal.on{opacity:1;transform:none}@keyframes marquee{to{transform:translateX(-50%)}}
+    @media(max-width:900px){.hero-grid,.head,.services,.service-body,.case-wall,.connect-card{grid-template-columns:1fr}.links a{display:none}.prism-box{min-height:390px}.metrics,.method{grid-template-columns:repeat(2,1fr)}.service-nav{position:relative;top:0;grid-template-columns:repeat(2,1fr)}.service-btn{min-height:64px}.case-row{grid-template-columns:1fr}.proofbar{grid-template-columns:1fr}}
+    @media(max-width:560px){.metrics,.method{grid-template-columns:1fr}.identity-line small{width:100%}.service-nav{grid-template-columns:1fr}.service-hero,.block{padding:20px}.prism-caption{white-space:normal;text-align:center;width:max-content;max-width:88%}.contact-pills span{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">跳到主要内容</a>
-  <div class="grain" aria-hidden="true"></div>
-  <nav class="nav" aria-label="主导航">
-    <a class="brand" href="#top" aria-label="返回顶部">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <strong>棱镜轨迹</strong>
-    </a>
-    <div class="nav-links">
-      <a href="#origin">我是谁</a>
-      <a href="#services">服务线</a>
-      <a href="#beliefs">底层信条</a>
-      <a href="#map">复合体地图</a>
-      <a href="#connect">找到我</a>
-      <button class="ghost-btn" type="button" id="toggleMotion" aria-pressed="false">降低动效</button>
-    </div>
-  </nav>
+  <a class="skip" href="#main">跳到主要内容</a>
+  <nav class="nav"><div class="shell nav-inner"><a class="brand" href="#top"><span class="mark" aria-hidden="true"></span><span>棱镜轨迹</span></a><div class="links"><a href="#identity">我是谁</a><a href="#services">服务线</a><a href="#method">方法论</a><a href="#cases">成功案例</a><a href="#connect">联系</a></div></div></nav>
 
   <header class="hero" id="top">
-    <div>
-      <div class="eyebrow reveal"><span class="pulse-dot" aria-hidden="true"></span>AI × 商业化 × 投资 × 内容</div>
-      <h1 class="reveal">偷偷升级的人</h1>
-      <p class="subtitle reveal">我是棱镜轨迹。一个从农村走出来的家族首代大学生，如今把六年多技术、商业、全球化与投资经验，收敛成一套可执行的<strong>个人经营体系统</strong>。如果你正在寻求跃迁、卡在选择上，或者想把目标推进落地，这里是我的交互式说明书。</p>
-      <div class="hero-actions reveal">
-        <a class="primary-btn" href="#services">探索我能交付什么</a>
-        <a class="secondary-btn" href="#connect">直接联系</a>
+    <div class="wide hero-grid">
+      <div>
+        <div class="tag reveal"><i></i>人生有无限可能，关键是让光线穿过正确的切面</div>
+        <h1 class="reveal">把普通人生，折射成<span class="grad">更多可能</span>。</h1>
+        <p class="lead reveal">我是棱镜轨迹。AI 架构师、投资实践者、内容创作者，也在做求职、求学、AI 落地和投研陪跑。我的核心能力不是“懂很多”，而是把技术、资源、钱、内容和选择，搭成一套能持续复利的系统。</p>
+        <div class="hero-actions reveal"><a class="btn primary" href="#services">看我能交付什么</a><a class="btn secondary" href="#cases">先看案例与证据</a></div>
+        <div class="metrics reveal" aria-label="关键证据">
+          <div class="metric"><b>AI</b><span>大模型工程化与业务交付</span></div><div class="metric"><b>5</b><span>门语言日常沟通</span></div><div class="metric"><b>50+</b><span>国家足迹与全球资源</span></div><div class="metric"><b>178%</b><span>2026 上半年实盘收益率</span></div>
+        </div>
       </div>
-    </div>
-    <div class="prism-stage" aria-label="棱镜轨迹的五面复合体视觉装置">
-      <div class="orbit" aria-hidden="true"></div>
-      <div class="orbit" aria-hidden="true"></div>
-      <div class="ray r1" aria-hidden="true"></div>
-      <div class="ray r2" aria-hidden="true"></div>
-      <div class="ray r3" aria-hidden="true"></div>
-      <div class="prism" id="prism" aria-hidden="true">
-        <span class="facet"></span><span class="facet"></span><span class="facet"></span><span class="facet"></span><span class="facet"></span>
+      <div class="prism-box reveal" aria-label="棱镜切片视觉：象征人生无限可能">
+        <div class="beam b1"></div><div class="beam b2"></div>
+        <div class="prism-core" aria-hidden="true"><span class="slice s1"></span><span class="slice s2"></span><span class="slice s3"></span><span class="slice s4"></span><span class="slice s5"></span></div>
+        <div class="prism-caption">不同切面：AI / 商业 / 投资 / 内容 / 系统杠杆</div>
       </div>
     </div>
   </header>
 
-  <aside class="metrics-strip reveal" aria-label="可验证的硬指标">
-    <div class="metric"><b>5</b><span>门语言可日常沟通</span></div>
-    <div class="metric"><b>50+</b><span>国家足迹与全球资源触点</span></div>
-    <div class="metric"><b>178%</b><span>2026 上半年实盘收益率</span></div>
-    <div class="metric"><b>100+</b><span>篇长期方法论与投研笔记</span></div>
-  </aside>
-
   <main id="main">
-    <section id="origin">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">01 · Origin Story</div>
-          <h2>出厂设定不重要，升级路径才重要。</h2>
-        </div>
-        <p>这不是一个标准成功学故事，而是一个把错题、资源约束、后知后觉都拆成系统组件，再一层层重构的过程。</p>
+    <section id="identity"><div class="shell">
+      <div class="head reveal"><div><div class="k">01 · WHO AM I</div><h2>我不是单一标签，而是一组可组合的切面。</h2></div><p>“我是谁”不再用左右对切的大段文字解释，而用更像说明书的方式：起点、能力、资产、目标，层层展开。</p></div>
+      <div class="identity reveal">
+        <div class="identity-line"><small>起点</small><strong>农村 · 首代 · 自己蹚路</strong><span>出厂设定不算好，所以更相信系统、杠杆和复盘。</span></div>
+        <div class="identity-line"><small>主业</small><strong>AI 架构师</strong><span>负责 AI 能力在客户业务场景落地，关注工程化、规模化、可复用。</span></div>
+        <div class="identity-line"><small>副业</small><strong>咨询 × 代购 × 投研 × 内容</strong><span>不是四处乱试，而是在构建第二曲线和个人经营体。</span></div>
+        <div class="identity-line"><small>目标</small><strong>把经验变成可复制模板</strong><span>让更多普通人少走弯路、多赚点钱、活得更有选择权。</span></div>
+        <div class="ticker" aria-hidden="true"><div class="ticker-track"><span class="chip">快：24 小时内出方案</span><span class="chip">准：深访 + AI 结构化</span><span class="chip">狠：敢直言，敢重来</span><span class="chip">复利：资源、内容、现金流互相供能</span><span class="chip">快：24 小时内出方案</span><span class="chip">准：深访 + AI 结构化</span><span class="chip">狠：敢直言，敢重来</span><span class="chip">复利：资源、内容、现金流互相供能</span></div></div>
       </div>
-      <div class="timeline">
-        <aside class="sticky-note reveal">
-          <h3>从错题家副本到系统化复利</h3>
-          <p>核心不是“逆袭叙事”，而是长期把选择、能力、资源、现金流放进同一张系统图里迭代。</p>
-        </aside>
-        <div class="timeline-list">
-          <article class="timeline-item reveal"><time>Before 25</time><div><h3>农村 · 首代 · 自己蹚路</h3><p>家里没资源、没背景、没学历传承，第一份工作甚至是物理意义上爬管道、洗滤网。</p></div></article>
-          <article class="timeline-item reveal"><time>25+</time><div><h3>AI 架构师 · 工程化交付</h3><p>负责 AI 能力在客户业务场景的落地交付，把大模型能力变成可规模化、可复用的业务结果。</p></div></article>
-          <article class="timeline-item reveal"><time>Now</time><div><h3>副业矩阵 · 第二曲线</h3><p>知识付费、全球代购、求职求学咨询、内容 IP 与投研分享共同构成复合型现金流。</p></div></article>
-          <article class="timeline-item reveal"><time>Next</time><div><h3>个人经营体模板</h3><p>目标是沉淀一套 AI × 商业化 × 投资 × 内容 × 系统杠杆的方法论，并让它可复制。</p></div></article>
-        </div>
-      </div>
-    </section>
+    </div></section>
 
-    <section id="services">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">02 · Delivery Lines</div>
-          <h2>四条服务线，不卖热闹，只交付推进。</h2>
+    <section id="services"><div class="shell">
+      <div class="head reveal"><div><div class="k">02 · SERVICE LINES</div><h2>服务线要讲逻辑，也要讲证据。</h2></div><p>每条服务都补上“适合谁、怎么做、成功样本、可验证证据”，让页面更有信服力，而不是只放漂亮卡片。</p></div>
+      <div class="services reveal">
+        <div class="service-nav" role="tablist" aria-label="服务线">
+          <button class="service-btn" role="tab" aria-selected="true" data-key="job"><b>深度求职</b>从简历到 Offer</button>
+          <button class="service-btn" role="tab" aria-selected="false" data-key="study"><b>深度求学</b>用项目思维择校</button>
+          <button class="service-btn" role="tab" aria-selected="false" data-key="ai"><b>AI 落地</b>企业提效与 Agent</button>
+          <button class="service-btn" role="tab" aria-selected="false" data-key="invest"><b>投研陪跑</b>认知复利与执行</button>
         </div>
-        <p>点击左侧标签切换。每条线都对应一个真实痛点：求职、求学、AI 落地、投研体系。</p>
+        <article class="service-panel" id="servicePanel" role="tabpanel" tabindex="0"></article>
       </div>
-      <div class="service-lab reveal">
-        <div class="service-tabs" role="tablist" aria-label="服务线切换">
-          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="servicePanel" data-service="job">深度求职</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="study">深度求学</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="ai">AI 落地</button>
-          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="invest">投研陪跑</button>
-        </div>
-        <article class="service-card" id="servicePanel" role="tabpanel" tabindex="0" data-index="01"></article>
-      </div>
-    </section>
+    </div></section>
 
-    <section id="beliefs">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">03 · Philosophy</div>
-          <h2>快、准、狠，以及两条底层信条。</h2>
-        </div>
-        <p>我更在意把“努力”的 ROI 拉高：少走弯路、多赚点钱、活得更有选择权。</p>
-      </div>
-      <div class="beliefs">
-        <article class="belief reveal" style="--belief-color: var(--gold)"><h3>用系统思维找杠杆。</h3><p>探寻最轻松的方式，在最短时间赚到最多的钱。不是走捷径，而是每天 review 收入结构、提升被动收入占比，跟最会赚钱的人学、做、磨炼自己的“钱法”。</p></article>
-        <article class="belief reveal" style="--belief-color: var(--green)"><h3>拒绝无效努力。</h3><p>授人以鱼不如授人以渔。方向和机遇选择比人挤人更重要，认知框架式搭建比短期鸡血更可持续。</p></article>
-      </div>
-    </section>
+    <section id="method"><div class="shell">
+      <div class="head reveal"><div><div class="k">03 · OPERATING SYSTEM</div><h2>不是鸡血，是一套推进系统。</h2></div><p>高级感来自克制；信服力来自过程透明。服务不是“我很厉害”，而是把问题推进到可交付、可复盘、可迭代。</p></div>
+      <div class="method reveal"><article class="method-card" data-no="01"><h3>诊断</h3><p>先把你的目标、资源、约束、风险拆开，不急着给模板答案。</p></article><article class="method-card" data-no="02"><h3>重构</h3><p>用产品化、商业化和系统思维重写路径：更短、更准、更能验证。</p></article><article class="method-card" data-no="03"><h3>陪跑</h3><p>方案只是开始，真正重要的是执行、反馈、复盘和下一轮迭代。</p></article></div>
+    </div></section>
 
-    <section id="map">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">04 · Compound Map</div>
-          <h2>把个人能力做成一台复利机器。</h2>
-        </div>
-        <p>把鼠标或手指放到地图节点上，查看每个模块在个人经营体里的作用。</p>
+    <section id="cases"><div class="shell">
+      <div class="head reveal"><div><div class="k">04 · PROOF & CASES</div><h2>让案例替我说话。</h2></div><p>这里把个人说明书里散落的证据重新收束：服务案例、项目案例、投资证据和内容沉淀。</p></div>
+      <div class="case-wall reveal">
+        <article class="big-case"><h3>四条线都不是概念，已经有真实战报。</h3><p>求职、求学、AI、理财四条服务线分别有案例库与项目沉淀；具体细节可在私下沟通中提供 Reference。</p><div class="case-list"><div class="case-row"><b>求职案例</b><span>“躺平求职”：从简历整形、面试操盘到谈薪设计，目标是提升筛选率与 Offer 质量。</span></div><div class="case-row"><b>求学案例</b><span>“躺平求学”：用教授人脉、课程设置、校友网络三定律，把选校变成 ROI 项目。</span></div><div class="case-row"><b>AI 项目</b><span>智能康复中心师生管理系统、巴西药品美妆成分自动审核系统、学生竞赛自动申报管理系统。</span></div><div class="case-row"><b>投研陪跑</b><span>围绕 AI、存储、半导体、硬科技等高景气板块，沉淀决策日志与复盘体系。</span></div></div></article>
+        <div class="mini-stack"><article class="mini-case"><h3>硬指标</h3><p>5 门语言、50+ 国家、公众号 100+ 篇长文、2026 上半年实盘收益率 178%。</p></article><article class="mini-case"><h3>合作对象</h3><p>内容创作者、投研搭子、技术搭子、优质买手 / 供应链，都可以一起搭建复利飞轮。</p></article></div>
       </div>
-      <div class="map-wrap reveal">
-        <div class="map" aria-label="AI 商业化 投资 内容 系统杠杆复合体地图">
-          <svg aria-hidden="true" viewBox="0 0 900 520" preserveAspectRatio="none">
-            <path d="M190 120 C310 210 360 230 450 260 C560 190 635 155 725 130" fill="none" stroke="rgba(244,239,227,.22)" stroke-width="2" stroke-dasharray="8 12"/>
-            <path d="M225 395 C325 320 380 295 450 260 C560 320 610 380 700 395" fill="none" stroke="rgba(244,239,227,.2)" stroke-width="2" stroke-dasharray="8 12"/>
-            <path d="M190 120 C190 250 210 320 225 395" fill="none" stroke="rgba(244,239,227,.14)" stroke-width="1.5"/>
-            <path d="M725 130 C730 250 720 320 700 395" fill="none" stroke="rgba(244,239,227,.14)" stroke-width="1.5"/>
-          </svg>
-          <button class="node" data-node="ai"><b>AI 工程化</b><small>从模型到交付</small></button>
-          <button class="node" data-node="biz"><b>商业化</b><small>从资源到订单</small></button>
-          <button class="node" data-node="invest"><b>投资体系</b><small>从认知到仓位</small></button>
-          <button class="node" data-node="content"><b>内容 IP</b><small>从经验到信任</small></button>
-          <button class="node" data-node="system"><b>系统杠杆</b><small>从单点到复利</small></button>
-        </div>
-        <aside class="map-copy" id="mapCopy" aria-live="polite">
-          <h3>系统杠杆</h3>
-          <p>真正的目标不是“什么都会一点”，而是让技术、内容、资源、现金流互相供能，形成可持续的个人复利结构。</p>
-        </aside>
-      </div>
-    </section>
+    </div></section>
 
-    <section class="connect" id="connect">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">05 · Connect</div>
-          <h2>如果你也在路上，欢迎一起搞点事。</h2>
-        </div>
-        <p>买服务、谈合作、交朋友，或者只是找个人聊聊，都可以。加微信请备注“来源 + 想聊什么”。</p>
-      </div>
-      <div class="contact-grid reveal">
-        <a class="contact-card" href="javascript:void(0)" aria-label="微信公众号：棱镜轨迹"><b>微信公众号</b><span>个人系统化经营、投研复盘、职业跃迁方法论</span></a>
-        <a class="contact-card" href="javascript:void(0)" aria-label="小红书：棱镜轨迹"><b>小红书</b><span>轻量化生活、全球旅行、代购图文短内容</span></a>
-        <a class="contact-card" href="javascript:void(0)" aria-label="知识星球：棱镜轨迹"><b>知识星球</b><span>求职、求学、投研三大模块深度陪跑</span></a>
-        <a class="contact-card" href="javascript:void(0)" aria-label="合作伙伴招募"><b>合作伙伴</b><span>内容、投研、技术、供应链，一起做复利飞轮</span></a>
-      </div>
-      <div class="wechat reveal">
-        <div><strong>微信个人号</strong><br><span>建议备注：公众号 + 求职咨询 / 朋友介绍 + 投研合作</span></div>
-        <code>sigmaboy1025</code>
-      </div>
-    </section>
+    <section class="connect" id="connect"><div class="shell"><div class="connect-card reveal"><div><div class="k">05 · LET'S CONNECT</div><h2>如果你也在路上，我们可以一起搞点事。</h2><p>买服务、谈合作、交朋友，或者只是找个人聊聊都可以。加微信请备注“来源 + 想聊什么”。</p><div class="wechat">微信个人号：<code>sigmaboy1025</code></div></div><div class="contact-pills"><span>微信公众号：棱镜轨迹</span><span>小红书：棱镜轨迹</span><span>知识星球：棱镜轨迹</span><span>内容 / 投研 / 技术 / 供应链合作</span></div></div></div></section>
   </main>
-
-  <footer>© 2026 棱镜轨迹 · 出厂设定不重要，重要的是你要不要开始偷偷升级。</footer>
+  <footer><div class="shell">© 2026 棱镜轨迹 · 人生有无限可能，关键是找到让光折射的切面。</div></footer>
 
   <script>
-    const services = {
-      job: {
-        index: '01', color: 'oklch(73% 0.16 78)', title: '深度求职 · 从简历到 Offer',
-        fit: '适合卡在简历筛选、面试通不过、想去大厂/外企/AI 方向，或需要精准内推与谈薪打法的人。',
-        bullets: ['用产品与商业化成功思维重写经历，提升筛选率', 'STAR-Plus 结构、数据化叙事、反问设计与面试操盘', '谈薪策略不被“30% 涨幅”限制，争取满意涨幅', '头部互联网 / 外企直达部门负责人级别的内推通道']
-      },
-      study: {
-        index: '02', color: 'oklch(56% 0.13 156)', title: '深度求学 · 用项目思维择校',
-        fit: '适合冲刺英美港新藤校、G5、商学院，或希望把学历投资 ROI 最大化的理性派申请者。',
-        bullets: ['选校三定律：教授人脉、课程设置、校友网络', '标化、文书、推荐信、面试的全流程时间轴管理', '985 / 双非冲进 G5 / 常春藤的案例档案可对齐', '精准背景提升，打造独一无二而非流水线申请者']
-      },
-      ai: {
-        index: '03', color: 'oklch(50% 0.13 238)', title: 'AI 落地咨询 · 真正用得上的企业提效',
-        fit: '适合想用 AI 提效但不知道从哪下手，或踩过 AI 转型概念坑、想找靠谱人落地的团队。',
-        bullets: ['从业务诊断到 Agent 部署，全链路陪跑', '不卖方案，只交付可验证结果', '顶尖大模型生态一手资源，降低试错成本', '销售、客服、运营、内容自动化改造，跑通 ROI 正向案例']
-      },
-      invest: {
-        index: '04', color: 'oklch(59% 0.19 34)', title: '投研陪跑 · 认知复利',
-        fit: '适合想搭建投研体系、不想只做接盘侠，关注 AI、存储、半导体、硬科技等高景气板块的选股型玩家。',
-        bullets: ['重构投资体系，提升认知与执行', '建仓、加仓、止盈、复盘四段式框架', '每周信息源筛选与关键事件预判', '决策日志沉淀，结合 Agent 辅助选股与买卖']
-      }
+    const data={
+      job:{tint:'rgba(215,157,66,.18)',title:'深度求职 · 从简历到 Offer',desc:'不是帮你“润色几句话”，而是把候选人当成一个产品：定位、卖点、证据链、面试叙事和谈薪策略一起重构。',fit:['卡在简历筛选 / 面试通不过','想去大厂、外企或 AI 方向','跨行、GAP、背景弱但想逆风翻盘','需要精准内推与谈薪策略'],logic:['简历整形：用产品与商业化成功思维重写经历','面试操盘：STAR-Plus、数据化叙事、反问设计','谈薪打法：不被默认涨幅框死，争取满意结果','内推资源：头部互联网 / 外企直达关键人'],cases:['躺平求职案例库：简历、面试、谈薪全链路','可按目标岗位拆解 JD 与候选人差距','私下可提供脱敏 Reference 与过程复盘'],proof:['筛选率','Offer 质量','谈薪空间']},
+      study:{tint:'rgba(94,155,115,.16)',title:'深度求学 · 用项目思维择校',desc:'把留学申请从“中介流水线”拉回项目管理：目标校、教授资源、课程 ROI、校友网络与时间轴一起算清楚。',fit:['冲刺英美港新、藤校、G5、商学院','中介卷得头秃但 Dream Offer 不稳','希望学历投资 ROI 最大化','需要背景提升与文书差异化'],logic:['选校三定律：教授人脉、课程设置、校友网络','时间轴管理：标化、文书、推荐信、面试','案例复用：对齐成功档案而非盲目焦虑','背景提升：打造独一无二，不做流水线产物'],cases:['躺平求学案例库：多个 985 / 双非冲刺名校路径','文书与背景项目围绕长期职业目标设计','私下可对齐完整申请节奏与材料结构'],proof:['梦校定位','时间轴','ROI']},
+      ai:{tint:'rgba(83,111,168,.16)',title:'AI 落地咨询 · 真正用得上的企业提效',desc:'不卖“AI 转型焦虑”，而是从具体业务切口开始，跑通第一个 ROI 正向的自动化案例。',fit:['想用 AI 提效但不知道从哪下手','被概念轰炸、踩过坑的团队','销售、客服、运营、内容团队','中小微企业主或轻量化业务团队'],logic:['业务诊断：找到最值得自动化的高频痛点','Agent 部署：从流程拆解到工具串联','结果交付：不止 PPT，追求可运行系统','ROI 复盘：省了多少时间、少了多少错误'],cases:['智能康复中心师生管理系统','巴西药品美妆成分自动审核系统','学生竞赛自动申报管理系统'],proof:['流程自动化','错误率下降','ROI 正向']},
+      invest:{tint:'rgba(215,106,81,.14)',title:'投研陪跑 · 认知复利',desc:'目标不是带你追热点，而是帮你形成自己的投研框架、仓位纪律和复盘系统。',fit:['不想只做接盘侠的散户','关注 AI、存储、半导体、硬科技','想搭建选股与买卖体系','需要信息源筛选与事件预判'],logic:['体系重构：产业势、资金势、走势势共振','四段式：建仓、加仓、止盈、复盘','每周筛选：信息源、关键事件、风险变量','决策日志：把认知沉淀成纪律'],cases:['2026 上半年实盘收益率 178%','港股 / A 股实盘 Top 梯队表现','长期输出投研复盘与方法论'],proof:['认知框架','仓位纪律','复盘闭环']}
     };
-
-    const panel = document.querySelector('#servicePanel');
-    const tabButtons = [...document.querySelectorAll('.tab-btn')];
-    function renderService(key) {
-      const item = services[key];
-      panel.dataset.index = item.index;
-      panel.style.setProperty('--service-color', item.color);
-      panel.innerHTML = `<h3>${item.title}</h3><p class="fit">${item.fit}</p><ul>${item.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
-      tabButtons.forEach(btn => btn.setAttribute('aria-selected', String(btn.dataset.service === key)));
-    }
-    tabButtons.forEach(btn => btn.addEventListener('click', () => renderService(btn.dataset.service)));
-    renderService('job');
-
-    const mapText = {
-      ai: ['AI 工程化', '把大模型能力从 demo 变成真实业务场景里可规模化、可复用、可交付的系统。'],
-      biz: ['商业化', '把经验、资源和方法论产品化，用可验证结果建立信任，再形成复购与转介绍。'],
-      invest: ['投资体系', '用产业势、资金势、走势势共振来判断机会，把认知沉淀成仓位纪律。'],
-      content: ['内容 IP', '持续输出复盘、方法论与投研笔记，让内容成为长期信任资产。'],
-      system: ['系统杠杆', '让技术、内容、资源、现金流互相供能，形成可持续的个人复利结构。']
-    };
-    const copy = document.querySelector('#mapCopy');
-    document.querySelectorAll('.node').forEach(node => {
-      const update = () => {
-        const [title, desc] = mapText[node.dataset.node];
-        copy.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
-      };
-      node.addEventListener('mouseenter', update);
-      node.addEventListener('focus', update);
-      node.addEventListener('click', update);
-    });
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    const motionBtn = document.querySelector('#toggleMotion');
-    let reduced = false;
-    motionBtn.addEventListener('click', () => {
-      reduced = !reduced;
-      motionBtn.setAttribute('aria-pressed', String(reduced));
-      motionBtn.textContent = reduced ? '恢复动效' : '降低动效';
-      document.documentElement.style.setProperty('scroll-behavior', reduced ? 'auto' : 'smooth');
-      document.querySelectorAll('.orbit, .prism').forEach(el => el.style.animationPlayState = reduced ? 'paused' : 'running');
-    });
-
-    const prism = document.querySelector('#prism');
-    let dragging = false;
-    let startX = 0;
-    let angle = -28;
-    prism.addEventListener('pointerdown', e => { dragging = true; startX = e.clientX; prism.setPointerCapture(e.pointerId); prism.style.cursor = 'grabbing'; });
-    prism.addEventListener('pointermove', e => {
-      if (!dragging) return;
-      const delta = e.clientX - startX;
-      prism.style.animation = 'none';
-      prism.style.transform = `rotateX(60deg) rotateZ(${angle + delta / 4}deg) translateY(-8px)`;
-    });
-    prism.addEventListener('pointerup', e => { dragging = false; angle += (e.clientX - startX) / 4; prism.style.cursor = 'grab'; });
+    const panel=document.querySelector('#servicePanel');const buttons=[...document.querySelectorAll('.service-btn')];
+    function render(key){const s=data[key];panel.style.setProperty('--tint',s.tint);panel.innerHTML=`<div class="service-hero"><h3>${s.title}</h3><p>${s.desc}</p><div class="proofbar">${s.proof.map(x=>`<div class="proof"><b>${x}</b><span>关键验收点</span></div>`).join('')}</div></div><div class="service-body"><div class="block"><h4>适合谁</h4><ul>${s.fit.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="block"><h4>怎么推进</h4><ul>${s.logic.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="block" style="grid-column:1/-1"><h4>成功样本 / 证据</h4><div class="cases">${s.cases.map(x=>`<div class="case"><b>${x.split('：')[0]}</b><span>${x.includes('：')?x.split('：').slice(1).join('：'):x}</span></div>`).join('')}</div></div></div>`;buttons.forEach(b=>b.setAttribute('aria-selected',String(b.dataset.key===key)));}
+    buttons.forEach(b=>b.addEventListener('click',()=>render(b.dataset.key)));render('job');
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </script>
 </body>
 </html>

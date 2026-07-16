@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="棱镜轨迹：AI × 商业化 × 投资 × 内容的个人说明书与交互式个人网页。" />
+  <meta name="theme-color" content="#f4efe3" />
+  <title>棱镜轨迹 | 个人经营体说明书</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,60,1&family=Manrope:wght@400;500;650;800&display=swap');
+
+    :root {
+      --ink: oklch(20% 0.032 74);
+      --ink-soft: oklch(35% 0.045 74);
+      --muted: oklch(49% 0.04 78);
+      --paper: oklch(95% 0.032 88);
+      --paper-deep: oklch(89% 0.046 82);
+      --panel: oklch(98% 0.024 92 / 0.82);
+      --gold: oklch(73% 0.16 78);
+      --ember: oklch(59% 0.19 34);
+      --green: oklch(56% 0.13 156);
+      --blue: oklch(50% 0.13 238);
+      --violet: oklch(49% 0.16 302);
+      --line: oklch(75% 0.044 80);
+      --shadow: 0 26px 70px oklch(28% 0.05 74 / 0.14);
+      --radius-xl: 30px;
+      --radius-lg: 20px;
+      --radius-sm: 10px;
+      --font-display: "Fraunces", "Noto Serif SC", serif;
+      --font-body: "Manrope", "Noto Serif SC", sans-serif;
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      color: var(--ink);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 18% 8%, oklch(85% 0.12 78 / 0.78), transparent 28rem),
+        radial-gradient(circle at 88% 14%, oklch(72% 0.08 163 / 0.28), transparent 24rem),
+        linear-gradient(135deg, var(--paper), oklch(92% 0.04 68));
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .42;
+      z-index: -1;
+      background-image:
+        linear-gradient(oklch(28% 0.04 74 / .06) 1px, transparent 1px),
+        linear-gradient(90deg, oklch(28% 0.04 74 / .05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+    }
+
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+
+    .skip-link {
+      position: fixed;
+      left: 1rem;
+      top: -5rem;
+      z-index: 100;
+      background: var(--ink);
+      color: var(--paper);
+      padding: .8rem 1rem;
+      border-radius: 999px;
+      transition: top .2s ease;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .grain {
+      position: fixed;
+      inset: -20%;
+      pointer-events: none;
+      z-index: -1;
+      opacity: .12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .9rem clamp(1rem, 3vw, 2.4rem);
+      backdrop-filter: blur(18px);
+      background: color-mix(in oklch, var(--paper) 76%, transparent);
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 34%);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .72rem;
+      text-decoration: none;
+      min-width: max-content;
+    }
+    .brand-mark {
+      width: 2.25rem;
+      height: 2.25rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: conic-gradient(from 210deg, var(--gold), var(--green), var(--blue), var(--ember), var(--gold));
+      box-shadow: inset 0 0 0 6px var(--paper), 0 10px 30px oklch(35% 0.08 70 / .18);
+    }
+    .brand strong { font-family: var(--font-display); font-size: 1.06rem; letter-spacing: .02em; }
+    .nav-links { display: flex; gap: .35rem; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a, .ghost-btn {
+      border: 1px solid transparent;
+      color: var(--ink-soft);
+      text-decoration: none;
+      padding: .64rem .82rem;
+      border-radius: 999px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      transition: transform .22s cubic-bezier(.2,.9,.2,1), background .22s, border-color .22s;
+    }
+    .nav-links a:hover, .ghost-btn:hover, .nav-links a:focus-visible, .ghost-btn:focus-visible {
+      background: oklch(98% 0.02 90 / .66);
+      border-color: color-mix(in oklch, var(--line), var(--ink) 16%);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100dvh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(310px, .72fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      padding: clamp(2rem, 7vw, 7rem) clamp(1.1rem, 5vw, 5.6rem) clamp(3rem, 6vw, 6rem);
+    }
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      gap: .55rem;
+      align-items: center;
+      padding: .5rem .75rem;
+      border-radius: 999px;
+      border: 1px solid color-mix(in oklch, var(--line), var(--ink) 12%);
+      background: color-mix(in oklch, var(--paper), white 34%);
+      font-size: .9rem;
+      color: var(--ink-soft);
+    }
+    .pulse-dot {
+      width: .58rem;
+      height: .58rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 .35rem color-mix(in oklch, var(--green), transparent 78%);
+    }
+    h1 {
+      margin: 1.35rem 0 1rem;
+      max-width: 11ch;
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 11.2rem);
+      line-height: .84;
+      letter-spacing: -.075em;
+      font-weight: 900;
+    }
+    .subtitle {
+      max-width: 58rem;
+      font-size: clamp(1.08rem, 1.7vw, 1.36rem);
+      line-height: 1.76;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+    .subtitle strong { color: var(--ink); font-weight: 800; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.7rem; }
+    .primary-btn, .secondary-btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      padding: .88rem 1.05rem;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s, background .22s;
+    }
+    .primary-btn { background: var(--ink); color: var(--paper); box-shadow: 0 16px 34px oklch(24% 0.04 74 / .22); }
+    .secondary-btn { background: color-mix(in oklch, var(--paper), white 28%); color: var(--ink); }
+    .primary-btn:hover, .secondary-btn:hover, .primary-btn:focus-visible, .secondary-btn:focus-visible { transform: translateY(-2px); outline: 3px solid color-mix(in oklch, var(--gold), transparent 55%); outline-offset: 3px; }
+    .primary-btn:active, .secondary-btn:active { transform: translateY(0) scale(.98); }
+
+    .prism-stage {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      perspective: 1000px;
+    }
+    .orbit {
+      position: absolute;
+      inset: 8%;
+      border: 1px dashed color-mix(in oklch, var(--ink), transparent 72%);
+      border-radius: 50%;
+      animation: spin 24s linear infinite;
+    }
+    .orbit:nth-child(2) { inset: 18% 4%; transform: rotateX(72deg); animation-duration: 34s; }
+    .prism {
+      width: min(28vw, 270px);
+      min-width: 210px;
+      aspect-ratio: 1;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: float 7s ease-in-out infinite;
+      cursor: grab;
+    }
+    .facet {
+      position: absolute;
+      inset: 0;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+      border: 1px solid color-mix(in oklch, var(--ink), transparent 64%);
+      background: linear-gradient(135deg, oklch(96% 0.04 86 / .76), oklch(68% 0.12 74 / .5));
+      box-shadow: inset 0 0 55px oklch(100% 0 0 / .5);
+      transform-origin: 50% 72%;
+      backdrop-filter: blur(8px);
+    }
+    .facet:nth-child(1) { transform: rotateY(0deg) translateZ(52px); }
+    .facet:nth-child(2) { transform: rotateY(72deg) translateZ(52px); background: linear-gradient(135deg, oklch(86% 0.1 156 / .6), transparent); }
+    .facet:nth-child(3) { transform: rotateY(144deg) translateZ(52px); background: linear-gradient(135deg, oklch(76% 0.12 238 / .54), transparent); }
+    .facet:nth-child(4) { transform: rotateY(216deg) translateZ(52px); background: linear-gradient(135deg, oklch(76% 0.14 34 / .5), transparent); }
+    .facet:nth-child(5) { transform: rotateY(288deg) translateZ(52px); background: linear-gradient(135deg, oklch(74% 0.12 302 / .5), transparent); }
+    .ray {
+      position: absolute;
+      height: 2px;
+      transform-origin: 0 50%;
+      background: linear-gradient(90deg, var(--ink), transparent);
+      opacity: .36;
+    }
+    .ray.r1 { width: 38%; left: 0; top: 44%; transform: rotate(-14deg); }
+    .ray.r2 { width: 42%; left: 57%; top: 52%; transform: rotate(12deg); background: linear-gradient(90deg, var(--green), transparent); }
+    .ray.r3 { width: 34%; left: 52%; top: 35%; transform: rotate(-34deg); background: linear-gradient(90deg, var(--ember), transparent); }
+
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin: 0 clamp(1.1rem, 5vw, 5.6rem);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+    .metric {
+      padding: clamp(1rem, 2vw, 1.45rem);
+      background: color-mix(in oklch, var(--paper), white 35%);
+    }
+    .metric b { font-family: var(--font-display); font-size: clamp(1.7rem, 4vw, 3.2rem); line-height: 1; letter-spacing: -.04em; }
+    .metric span { display: block; margin-top: .42rem; color: var(--muted); line-height: 1.35; }
+
+    main section {
+      padding: clamp(4.2rem, 9vw, 8rem) clamp(1.1rem, 5vw, 5.6rem);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .68fr) minmax(280px, .32fr);
+      align-items: end;
+      gap: 2rem;
+      margin-bottom: clamp(2rem, 5vw, 4rem);
+    }
+    .kicker { color: var(--ember); text-transform: uppercase; letter-spacing: .14em; font-size: .76rem; font-weight: 800; }
+    h2 {
+      margin: .45rem 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 6vw, 6rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+    }
+    .section-head p { margin: 0; color: var(--ink-soft); line-height: 1.75; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: minmax(240px, .8fr) minmax(0, 1.2fr);
+      gap: clamp(1rem, 4vw, 4rem);
+      align-items: start;
+    }
+    .sticky-note {
+      position: sticky;
+      top: 6rem;
+      padding: 1.35rem;
+      border-radius: var(--radius-xl);
+      background: var(--ink);
+      color: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .sticky-note h3 { margin: 0 0 .75rem; font-family: var(--font-display); font-size: 1.55rem; }
+    .sticky-note p { color: color-mix(in oklch, var(--paper), transparent 22%); line-height: 1.7; margin: 0; }
+    .timeline-list { display: grid; gap: 1rem; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1.2rem;
+      border-bottom: 1px solid color-mix(in oklch, var(--line), transparent 24%);
+      background: linear-gradient(90deg, color-mix(in oklch, var(--paper), white 26%), transparent);
+      border-radius: var(--radius-lg);
+    }
+    .timeline-item time { font-family: var(--font-display); font-weight: 800; color: var(--ember); }
+    .timeline-item h3 { margin: 0 0 .35rem; font-size: 1.2rem; }
+    .timeline-item p { margin: 0; color: var(--ink-soft); line-height: 1.7; }
+
+    .service-lab {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: clamp(1rem, 4vw, 3rem);
+      align-items: stretch;
+    }
+    .service-tabs {
+      display: grid;
+      gap: .65rem;
+      align-content: start;
+    }
+    .tab-btn {
+      min-height: 54px;
+      text-align: left;
+      border: 1px solid color-mix(in oklch, var(--line), transparent 12%);
+      background: color-mix(in oklch, var(--paper), white 28%);
+      padding: .9rem 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      color: var(--ink-soft);
+      transition: transform .2s, background .2s, color .2s, border-color .2s;
+    }
+    .tab-btn:hover, .tab-btn:focus-visible { transform: translateX(4px); outline: none; border-color: var(--ink); }
+    .tab-btn[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .service-card {
+      min-height: 420px;
+      padding: clamp(1.4rem, 4vw, 3.4rem);
+      border-radius: var(--radius-xl);
+      border: 1px solid color-mix(in oklch, var(--line), var(--ink) 8%);
+      background:
+        linear-gradient(135deg, color-mix(in oklch, var(--panel), white 8%), color-mix(in oklch, var(--paper-deep), transparent 18%)),
+        radial-gradient(circle at 86% 0%, var(--service-color, var(--gold)), transparent 18rem);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .service-card::after {
+      content: attr(data-index);
+      position: absolute;
+      right: -1rem;
+      bottom: -2.4rem;
+      font-family: var(--font-display);
+      font-size: clamp(7rem, 18vw, 15rem);
+      font-weight: 900;
+      color: oklch(20% 0.04 74 / .055);
+      letter-spacing: -.08em;
+      pointer-events: none;
+    }
+    .service-card h3 { margin: 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); line-height: 1; letter-spacing: -.04em; }
+    .service-card .fit { margin: 1rem 0 1.1rem; color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; max-width: 58rem; }
+    .service-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; max-width: 56rem; }
+    .service-card li { display: grid; grid-template-columns: 1rem 1fr; gap: .7rem; line-height: 1.6; color: var(--ink-soft); }
+    .service-card li::before { content: ""; width: .58rem; height: .58rem; border-radius: 50%; background: var(--service-color, var(--gold)); margin-top: .55rem; }
+
+    .beliefs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .belief {
+      min-height: 340px;
+      padding: clamp(1.4rem, 4vw, 2.8rem);
+      border: 1px solid color-mix(in oklch, var(--line), transparent 10%);
+      border-radius: var(--radius-xl);
+      background: color-mix(in oklch, var(--paper), white 28%);
+      position: relative;
+      overflow: hidden;
+    }
+    .belief::before {
+      content: "";
+      position: absolute;
+      width: 14rem;
+      height: 14rem;
+      border-radius: 50%;
+      right: -5rem;
+      top: -5rem;
+      background: color-mix(in oklch, var(--belief-color), transparent 68%);
+    }
+    .belief h3 { position: relative; margin: 0 0 .85rem; font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.05; }
+    .belief p { position: relative; color: var(--ink-soft); line-height: 1.8; margin: 0; }
+
+    .map-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 1rem;
+      align-items: stretch;
+    }
+    .map {
+      min-height: 460px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, oklch(24% 0.035 74), oklch(34% 0.05 95));
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid oklch(20% 0.04 74);
+    }
+    .map svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+    .node {
+      position: absolute;
+      min-width: 132px;
+      border: 1px solid oklch(94% 0.02 88 / .2);
+      background: oklch(94% 0.03 88 / .12);
+      color: var(--paper);
+      border-radius: 999px;
+      padding: .68rem .8rem;
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      transition: transform .22s, background .22s, border-color .22s;
+    }
+    .node:hover, .node:focus-visible { transform: translateY(-4px) scale(1.02); background: oklch(94% 0.03 88 / .2); outline: 3px solid oklch(75% 0.13 78 / .35); outline-offset: 4px; }
+    .node small { display: block; opacity: .72; }
+    .node[data-node="ai"] { left: 14%; top: 18%; }
+    .node[data-node="biz"] { right: 12%; top: 20%; }
+    .node[data-node="invest"] { left: 22%; bottom: 18%; }
+    .node[data-node="content"] { right: 18%; bottom: 18%; }
+    .node[data-node="system"] { left: 42%; top: 44%; background: oklch(78% 0.14 78 / .18); }
+    .map-copy {
+      border-radius: var(--radius-xl);
+      padding: 1.3rem;
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      align-content: center;
+    }
+    .map-copy h3 { margin: 0 0 .6rem; font-family: var(--font-display); font-size: 2rem; line-height: 1; }
+    .map-copy p { margin: 0; color: color-mix(in oklch, var(--paper), transparent 20%); line-height: 1.75; }
+
+    .connect {
+      border-radius: calc(var(--radius-xl) + 10px) calc(var(--radius-xl) + 10px) 0 0;
+      background: var(--ink);
+      color: var(--paper);
+      margin-top: 3rem;
+    }
+    .connect .section-head p { color: color-mix(in oklch, var(--paper), transparent 24%); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .contact-card {
+      min-height: 190px;
+      padding: 1.15rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid oklch(94% 0.02 88 / .16);
+      background: oklch(94% 0.02 88 / .075);
+      text-decoration: none;
+      display: grid;
+      align-content: space-between;
+      transition: transform .22s, background .22s;
+    }
+    .contact-card:hover, .contact-card:focus-visible { transform: translateY(-5px); background: oklch(94% 0.02 88 / .13); outline: 3px solid oklch(75% 0.13 78 / .3); outline-offset: 4px; }
+    .contact-card b { font-family: var(--font-display); font-size: 1.35rem; }
+    .contact-card span { color: color-mix(in oklch, var(--paper), transparent 25%); line-height: 1.5; }
+    .wechat {
+      margin-top: 1rem;
+      padding: 1.15rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid oklch(94% 0.02 88 / .18);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      background: oklch(94% 0.02 88 / .08);
+    }
+    .wechat code {
+      font-family: var(--font-body);
+      font-weight: 800;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+    footer { padding: 2rem clamp(1.1rem, 5vw, 5.6rem); background: var(--ink); color: color-mix(in oklch, var(--paper), transparent 30%); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.9,.2,1), transform .7s cubic-bezier(.2,.9,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes float { 0%, 100% { transform: rotateX(60deg) rotateZ(-28deg) translateY(0); } 50% { transform: rotateX(60deg) rotateZ(-18deg) translateY(-16px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 940px) {
+      .nav-links a { display: none; }
+      .hero, .section-head, .timeline, .service-lab, .map-wrap { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .prism-stage { min-height: 380px; }
+      .metrics-strip, .beliefs, .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sticky-note { position: relative; top: 0; }
+    }
+    @media (max-width: 620px) {
+      .metrics-strip, .beliefs, .contact-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .service-tabs { grid-template-columns: 1fr 1fr; }
+      .tab-btn { border-radius: var(--radius-lg); }
+      .map { min-height: 560px; }
+      .node { min-width: 118px; }
+      .node[data-node="ai"] { left: 7%; top: 12%; }
+      .node[data-node="biz"] { right: 5%; top: 21%; }
+      .node[data-node="invest"] { left: 8%; bottom: 23%; }
+      .node[data-node="content"] { right: 6%; bottom: 12%; }
+      .node[data-node="system"] { left: 27%; top: 47%; }
+      .wechat { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="grain" aria-hidden="true"></div>
+  <nav class="nav" aria-label="主导航">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <strong>棱镜轨迹</strong>
+    </a>
+    <div class="nav-links">
+      <a href="#origin">我是谁</a>
+      <a href="#services">服务线</a>
+      <a href="#beliefs">底层信条</a>
+      <a href="#map">复合体地图</a>
+      <a href="#connect">找到我</a>
+      <button class="ghost-btn" type="button" id="toggleMotion" aria-pressed="false">降低动效</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow reveal"><span class="pulse-dot" aria-hidden="true"></span>AI × 商业化 × 投资 × 内容</div>
+      <h1 class="reveal">偷偷升级的人</h1>
+      <p class="subtitle reveal">我是棱镜轨迹。一个从农村走出来的家族首代大学生，如今把六年多技术、商业、全球化与投资经验，收敛成一套可执行的<strong>个人经营体系统</strong>。如果你正在寻求跃迁、卡在选择上，或者想把目标推进落地，这里是我的交互式说明书。</p>
+      <div class="hero-actions reveal">
+        <a class="primary-btn" href="#services">探索我能交付什么</a>
+        <a class="secondary-btn" href="#connect">直接联系</a>
+      </div>
+    </div>
+    <div class="prism-stage" aria-label="棱镜轨迹的五面复合体视觉装置">
+      <div class="orbit" aria-hidden="true"></div>
+      <div class="orbit" aria-hidden="true"></div>
+      <div class="ray r1" aria-hidden="true"></div>
+      <div class="ray r2" aria-hidden="true"></div>
+      <div class="ray r3" aria-hidden="true"></div>
+      <div class="prism" id="prism" aria-hidden="true">
+        <span class="facet"></span><span class="facet"></span><span class="facet"></span><span class="facet"></span><span class="facet"></span>
+      </div>
+    </div>
+  </header>
+
+  <aside class="metrics-strip reveal" aria-label="可验证的硬指标">
+    <div class="metric"><b>5</b><span>门语言可日常沟通</span></div>
+    <div class="metric"><b>50+</b><span>国家足迹与全球资源触点</span></div>
+    <div class="metric"><b>178%</b><span>2026 上半年实盘收益率</span></div>
+    <div class="metric"><b>100+</b><span>篇长期方法论与投研笔记</span></div>
+  </aside>
+
+  <main id="main">
+    <section id="origin">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">01 · Origin Story</div>
+          <h2>出厂设定不重要，升级路径才重要。</h2>
+        </div>
+        <p>这不是一个标准成功学故事，而是一个把错题、资源约束、后知后觉都拆成系统组件，再一层层重构的过程。</p>
+      </div>
+      <div class="timeline">
+        <aside class="sticky-note reveal">
+          <h3>从错题家副本到系统化复利</h3>
+          <p>核心不是“逆袭叙事”，而是长期把选择、能力、资源、现金流放进同一张系统图里迭代。</p>
+        </aside>
+        <div class="timeline-list">
+          <article class="timeline-item reveal"><time>Before 25</time><div><h3>农村 · 首代 · 自己蹚路</h3><p>家里没资源、没背景、没学历传承，第一份工作甚至是物理意义上爬管道、洗滤网。</p></div></article>
+          <article class="timeline-item reveal"><time>25+</time><div><h3>AI 架构师 · 工程化交付</h3><p>负责 AI 能力在客户业务场景的落地交付，把大模型能力变成可规模化、可复用的业务结果。</p></div></article>
+          <article class="timeline-item reveal"><time>Now</time><div><h3>副业矩阵 · 第二曲线</h3><p>知识付费、全球代购、求职求学咨询、内容 IP 与投研分享共同构成复合型现金流。</p></div></article>
+          <article class="timeline-item reveal"><time>Next</time><div><h3>个人经营体模板</h3><p>目标是沉淀一套 AI × 商业化 × 投资 × 内容 × 系统杠杆的方法论，并让它可复制。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">02 · Delivery Lines</div>
+          <h2>四条服务线，不卖热闹，只交付推进。</h2>
+        </div>
+        <p>点击左侧标签切换。每条线都对应一个真实痛点：求职、求学、AI 落地、投研体系。</p>
+      </div>
+      <div class="service-lab reveal">
+        <div class="service-tabs" role="tablist" aria-label="服务线切换">
+          <button class="tab-btn" role="tab" aria-selected="true" aria-controls="servicePanel" data-service="job">深度求职</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="study">深度求学</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="ai">AI 落地</button>
+          <button class="tab-btn" role="tab" aria-selected="false" aria-controls="servicePanel" data-service="invest">投研陪跑</button>
+        </div>
+        <article class="service-card" id="servicePanel" role="tabpanel" tabindex="0" data-index="01"></article>
+      </div>
+    </section>
+
+    <section id="beliefs">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">03 · Philosophy</div>
+          <h2>快、准、狠，以及两条底层信条。</h2>
+        </div>
+        <p>我更在意把“努力”的 ROI 拉高：少走弯路、多赚点钱、活得更有选择权。</p>
+      </div>
+      <div class="beliefs">
+        <article class="belief reveal" style="--belief-color: var(--gold)"><h3>用系统思维找杠杆。</h3><p>探寻最轻松的方式，在最短时间赚到最多的钱。不是走捷径，而是每天 review 收入结构、提升被动收入占比，跟最会赚钱的人学、做、磨炼自己的“钱法”。</p></article>
+        <article class="belief reveal" style="--belief-color: var(--green)"><h3>拒绝无效努力。</h3><p>授人以鱼不如授人以渔。方向和机遇选择比人挤人更重要，认知框架式搭建比短期鸡血更可持续。</p></article>
+      </div>
+    </section>
+
+    <section id="map">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">04 · Compound Map</div>
+          <h2>把个人能力做成一台复利机器。</h2>
+        </div>
+        <p>把鼠标或手指放到地图节点上，查看每个模块在个人经营体里的作用。</p>
+      </div>
+      <div class="map-wrap reveal">
+        <div class="map" aria-label="AI 商业化 投资 内容 系统杠杆复合体地图">
+          <svg aria-hidden="true" viewBox="0 0 900 520" preserveAspectRatio="none">
+            <path d="M190 120 C310 210 360 230 450 260 C560 190 635 155 725 130" fill="none" stroke="rgba(244,239,227,.22)" stroke-width="2" stroke-dasharray="8 12"/>
+            <path d="M225 395 C325 320 380 295 450 260 C560 320 610 380 700 395" fill="none" stroke="rgba(244,239,227,.2)" stroke-width="2" stroke-dasharray="8 12"/>
+            <path d="M190 120 C190 250 210 320 225 395" fill="none" stroke="rgba(244,239,227,.14)" stroke-width="1.5"/>
+            <path d="M725 130 C730 250 720 320 700 395" fill="none" stroke="rgba(244,239,227,.14)" stroke-width="1.5"/>
+          </svg>
+          <button class="node" data-node="ai"><b>AI 工程化</b><small>从模型到交付</small></button>
+          <button class="node" data-node="biz"><b>商业化</b><small>从资源到订单</small></button>
+          <button class="node" data-node="invest"><b>投资体系</b><small>从认知到仓位</small></button>
+          <button class="node" data-node="content"><b>内容 IP</b><small>从经验到信任</small></button>
+          <button class="node" data-node="system"><b>系统杠杆</b><small>从单点到复利</small></button>
+        </div>
+        <aside class="map-copy" id="mapCopy" aria-live="polite">
+          <h3>系统杠杆</h3>
+          <p>真正的目标不是“什么都会一点”，而是让技术、内容、资源、现金流互相供能，形成可持续的个人复利结构。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="connect" id="connect">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">05 · Connect</div>
+          <h2>如果你也在路上，欢迎一起搞点事。</h2>
+        </div>
+        <p>买服务、谈合作、交朋友，或者只是找个人聊聊，都可以。加微信请备注“来源 + 想聊什么”。</p>
+      </div>
+      <div class="contact-grid reveal">
+        <a class="contact-card" href="javascript:void(0)" aria-label="微信公众号：棱镜轨迹"><b>微信公众号</b><span>个人系统化经营、投研复盘、职业跃迁方法论</span></a>
+        <a class="contact-card" href="javascript:void(0)" aria-label="小红书：棱镜轨迹"><b>小红书</b><span>轻量化生活、全球旅行、代购图文短内容</span></a>
+        <a class="contact-card" href="javascript:void(0)" aria-label="知识星球：棱镜轨迹"><b>知识星球</b><span>求职、求学、投研三大模块深度陪跑</span></a>
+        <a class="contact-card" href="javascript:void(0)" aria-label="合作伙伴招募"><b>合作伙伴</b><span>内容、投研、技术、供应链，一起做复利飞轮</span></a>
+      </div>
+      <div class="wechat reveal">
+        <div><strong>微信个人号</strong><br><span>建议备注：公众号 + 求职咨询 / 朋友介绍 + 投研合作</span></div>
+        <code>sigmaboy1025</code>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 棱镜轨迹 · 出厂设定不重要，重要的是你要不要开始偷偷升级。</footer>
+
+  <script>
+    const services = {
+      job: {
+        index: '01', color: 'oklch(73% 0.16 78)', title: '深度求职 · 从简历到 Offer',
+        fit: '适合卡在简历筛选、面试通不过、想去大厂/外企/AI 方向，或需要精准内推与谈薪打法的人。',
+        bullets: ['用产品与商业化成功思维重写经历，提升筛选率', 'STAR-Plus 结构、数据化叙事、反问设计与面试操盘', '谈薪策略不被“30% 涨幅”限制，争取满意涨幅', '头部互联网 / 外企直达部门负责人级别的内推通道']
+      },
+      study: {
+        index: '02', color: 'oklch(56% 0.13 156)', title: '深度求学 · 用项目思维择校',
+        fit: '适合冲刺英美港新藤校、G5、商学院，或希望把学历投资 ROI 最大化的理性派申请者。',
+        bullets: ['选校三定律：教授人脉、课程设置、校友网络', '标化、文书、推荐信、面试的全流程时间轴管理', '985 / 双非冲进 G5 / 常春藤的案例档案可对齐', '精准背景提升，打造独一无二而非流水线申请者']
+      },
+      ai: {
+        index: '03', color: 'oklch(50% 0.13 238)', title: 'AI 落地咨询 · 真正用得上的企业提效',
+        fit: '适合想用 AI 提效但不知道从哪下手，或踩过 AI 转型概念坑、想找靠谱人落地的团队。',
+        bullets: ['从业务诊断到 Agent 部署，全链路陪跑', '不卖方案，只交付可验证结果', '顶尖大模型生态一手资源，降低试错成本', '销售、客服、运营、内容自动化改造，跑通 ROI 正向案例']
+      },
+      invest: {
+        index: '04', color: 'oklch(59% 0.19 34)', title: '投研陪跑 · 认知复利',
+        fit: '适合想搭建投研体系、不想只做接盘侠，关注 AI、存储、半导体、硬科技等高景气板块的选股型玩家。',
+        bullets: ['重构投资体系，提升认知与执行', '建仓、加仓、止盈、复盘四段式框架', '每周信息源筛选与关键事件预判', '决策日志沉淀，结合 Agent 辅助选股与买卖']
+      }
+    };
+
+    const panel = document.querySelector('#servicePanel');
+    const tabButtons = [...document.querySelectorAll('.tab-btn')];
+    function renderService(key) {
+      const item = services[key];
+      panel.dataset.index = item.index;
+      panel.style.setProperty('--service-color', item.color);
+      panel.innerHTML = `<h3>${item.title}</h3><p class="fit">${item.fit}</p><ul>${item.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
+      tabButtons.forEach(btn => btn.setAttribute('aria-selected', String(btn.dataset.service === key)));
+    }
+    tabButtons.forEach(btn => btn.addEventListener('click', () => renderService(btn.dataset.service)));
+    renderService('job');
+
+    const mapText = {
+      ai: ['AI 工程化', '把大模型能力从 demo 变成真实业务场景里可规模化、可复用、可交付的系统。'],
+      biz: ['商业化', '把经验、资源和方法论产品化，用可验证结果建立信任，再形成复购与转介绍。'],
+      invest: ['投资体系', '用产业势、资金势、走势势共振来判断机会，把认知沉淀成仓位纪律。'],
+      content: ['内容 IP', '持续输出复盘、方法论与投研笔记，让内容成为长期信任资产。'],
+      system: ['系统杠杆', '让技术、内容、资源、现金流互相供能，形成可持续的个人复利结构。']
+    };
+    const copy = document.querySelector('#mapCopy');
+    document.querySelectorAll('.node').forEach(node => {
+      const update = () => {
+        const [title, desc] = mapText[node.dataset.node];
+        copy.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+      };
+      node.addEventListener('mouseenter', update);
+      node.addEventListener('focus', update);
+      node.addEventListener('click', update);
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const motionBtn = document.querySelector('#toggleMotion');
+    let reduced = false;
+    motionBtn.addEventListener('click', () => {
+      reduced = !reduced;
+      motionBtn.setAttribute('aria-pressed', String(reduced));
+      motionBtn.textContent = reduced ? '恢复动效' : '降低动效';
+      document.documentElement.style.setProperty('scroll-behavior', reduced ? 'auto' : 'smooth');
+      document.querySelectorAll('.orbit, .prism').forEach(el => el.style.animationPlayState = reduced ? 'paused' : 'running');
+    });
+
+    const prism = document.querySelector('#prism');
+    let dragging = false;
+    let startX = 0;
+    let angle = -28;
+    prism.addEventListener('pointerdown', e => { dragging = true; startX = e.clientX; prism.setPointerCapture(e.pointerId); prism.style.cursor = 'grabbing'; });
+    prism.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const delta = e.clientX - startX;
+      prism.style.animation = 'none';
+      prism.style.transform = `rotateX(60deg) rotateZ(${angle + delta / 4}deg) translateY(-8px)`;
+    });
+    prism.addEventListener('pointerup', e => { dragging = false; angle += (e.clientX - startX) / 4; prism.style.cursor = 'grab'; });
+  </script>
+</body>
+</html>

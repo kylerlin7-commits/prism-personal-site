@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>下一步自测｜棱镜轨迹</title>
+  <meta name="description" content="从一个真实困扰开始，整理目标、现状与约束，得到一份行动建议和适合你的资料、社群与咨询路径。">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="canonical" href="https://lazygrowth.top/assessment/">
+  <meta property="og:title" content="下一步自测｜棱镜轨迹"><meta property="og:type" content="website"><meta property="og:url" content="https://lazygrowth.top/assessment/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/site.css"><script src="../assets/site.js" defer></script>
+</head>
+<body data-page="assessment" data-root="../">
+  <a class="skip" href="#main">跳转到正文</a>
+  <header class="site-header"><div class="container header-inner"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>棱镜轨迹</span></a><nav class="desktop-nav" aria-label="自测导航"><a href="../#products">资料与服务</a><a href="../">回到主页</a></nav><div class="header-actions"><a class="audience-link" href="../enterprise/">企业合作 ↗</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="展开导航"><span></span><span></span></button></div></div><nav class="mobile-nav container" id="mobile-nav" aria-label="手机导航" hidden><a href="../">回到主页</a><a href="../#products">资料与服务</a></nav></header>
+  <main id="main" class="assessment-main container">
+    <div class="assessment-heading"><p class="eyebrow"><span class="little-star" aria-hidden="true">✳</span> 一份只围绕你的问题的自测</p><h1>把困扰写下来。<br><span class="serif-accent">让下一步浮现。</span></h1><p>不用填写完美答案。花几分钟，把现在的目标、处境和需要的支持理清。</p></div>
+    <div class="assessment-workspace">
+      <aside class="assessment-sidebar"><ol class="step-nav"><li class="current" data-step-label="0"><span>1</span><b>说清问题</b></li><li data-step-label="1"><span>2</span><b>看见现状</b></li><li data-step-label="2"><span>3</span><b>选择支持</b></li></ol><p data-storage-note>草稿自动保存在当前设备，不上传。<br>可以随时清除。</p><button type="button" class="underlined-link muted-link" id="clear-draft">清除填写内容</button><p class="storage-feedback" id="storage-status" role="status"></p></aside>
+      <div class="assessment-content">
+        <form id="assessment-form">
+          <section class="assessment-step" data-step="0"><div class="step-heading"><span>先从一件事开始</span><h2>什么，让你最近最卡住？</h2></div><div class="form-table">
+            <div class="form-row"><label for="assess-topic">问题方向</label><div><select id="assess-topic" name="topic"><option value="ai">AI 用起来</option><option value="career">职业下一步</option><option value="invest">投资与判断</option><option value="growth">学习与成长</option><option value="unsure">还没想清楚</option></select></div></div>
+            <div class="form-row"><label for="assess-problem">当前的困扰 <span>*</span></label><div><textarea id="assess-problem" name="problem" required maxlength="1200" placeholder="最近最让你卡住的一件事，是什么？"></textarea><small>尽量具体到一个情境，不用一次解决所有问题。</small></div></div>
+            <div class="form-row"><label for="assess-goal">希望发生的改变 <span>*</span></label><div><textarea id="assess-goal" name="goal" required maxlength="800" placeholder="如果三个月后这件事有了进展，你希望看见什么？"></textarea></div></div>
+          </div></section>
+          <section class="assessment-step" data-step="1" hidden><div class="step-heading"><span>把背景放到桌面上</span><h2>你站在哪里，有哪些限制？</h2></div><div class="form-table">
+            <div class="form-row"><label for="assess-stage">当前阶段</label><div><select id="assess-stage" name="stage"><option value="starting">刚开始，还在找方向</option><option value="tried">尝试过，但没形成方法</option><option value="working">已经在做，需要改进</option><option value="review">想找人 Review 一次</option></select></div></div>
+            <div class="form-row"><label for="assess-tried">已经尝试过</label><div><textarea id="assess-tried" name="tried" maxlength="800" placeholder="用过的工具、读过的资料、做过的尝试……选填。"></textarea></div></div>
+            <div class="form-row"><label for="assess-constraint">现实约束 <span>*</span></label><div><textarea id="assess-constraint" name="constraint" required maxlength="800" placeholder="时间、预算、技能基础、信息或资源，哪一点最限制你？"></textarea></div></div>
+            <div class="form-row"><label for="assess-time">每周能投入</label><div><select id="assess-time" name="time"><option value="small">不到 2 小时</option><option value="medium">2—5 小时</option><option value="large">5 小时以上</option></select></div></div>
+          </div></section>
+          <section class="assessment-step" data-step="2" hidden><div class="step-heading"><span>选一种舒服的开始方式</span><h2>你希望，得到怎样的支持？</h2></div><div class="support-options">
+            <label><input type="radio" name="support" value="resources" checked><span><b>先拿资料，自己做</b><small>用工具、模板和方法包迈出第一步。</small></span></label>
+            <label><input type="radio" name="support" value="community"><span><b>和同伴一起学</b><small>主题交流、作品反馈，持续更新。</small></span></label>
+            <label><input type="radio" name="support" value="consult"><span><b>聊一次具体问题</b><small>1 对 1 诊断、选型或方案 Review。</small></span></label>
+            <label><input type="radio" name="support" value="build"><span><b>需要实际搭建或持续陪跑</b><small>围绕明确目标确定交付与反馈范围。</small></span></label>
+          </div><div class="form-row optional-row"><label for="assess-note">还想补充什么</label><textarea id="assess-note" name="note" maxlength="800" placeholder="你希望被理解的部分。选填。"></textarea></div><p class="form-note">结果根据填写内容和所选偏好整理，帮助你开始行动。</p></section>
+          <div class="assessment-actions"><button type="button" class="button secondary" id="assess-back" hidden>← 上一步</button><span class="step-counter" id="step-counter">1 / 3</span><button type="button" class="button primary" id="assess-next">继续，看见现状 ↗</button><button type="submit" class="button primary" id="assess-submit" hidden>看看我的下一步 ↗</button></div>
+        </form>
+        <section class="assessment-result" id="assessment-result" aria-labelledby="result-title" hidden></section>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span>棱镜轨迹</span></a><span>从问题出发，找到下一步。</span><a href="../">回到主页 ↗</a><span>© <span data-year>2026</span></span></div></footer>
+  <noscript><p class="noscript-note">在线自测需要 JavaScript。你也可以直接添加微信 sigmaboy1025，说说你的问题。</p></noscript>
+</body>
+</html>
